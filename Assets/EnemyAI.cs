@@ -71,3 +71,4 @@ public class EnemyAI : MonoBehaviour
         }
     }
 }
+Fix enemy speed and health to 1 hit kill
