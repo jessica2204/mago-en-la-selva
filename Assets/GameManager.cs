@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject startPanel;         // shown before game starts
+    [SerializeField] private GameObject victoryPanel;
     [SerializeField] private TextMeshProUGUI finalScoreText; // shown on Game Over panel
     [SerializeField] private TextMeshProUGUI finalTimeText;
 
@@ -107,9 +108,28 @@ public class GameManager : MonoBehaviour
     {
         currentScore += points;
         UpdateHUD();
+
+        // Check win condition
+        if (currentScore >= 100 && gameRunning)
+        {
+            TriggerVictory();
+        }
+    }
+   
+    public void TriggerVictory()
+    {
+        gameRunning = false;
+        victoryPanel.SetActive(true);
+
+        // Hide HUD
+        scoreText.gameObject.SetActive(false);
+        livesText.gameObject.SetActive(false);
+        timeText.gameObject.SetActive(false);
+        difficultyText.gameObject.SetActive(false);
     }
 
     // ── Lives ─────────────────────────────────────────────────────────────
+
 
     public void LoseLife()
     {
@@ -121,6 +141,17 @@ public class GameManager : MonoBehaviour
         if (currentLives <= 0)
             TriggerGameOver();
     }
+
+    public void AddLife()
+    {
+        if (!gameRunning) return;
+        if (currentLives < startingLives)
+        {
+            currentLives++;
+            UpdateHUD();
+        }
+    }
+
 
     // ── Difficulty ────────────────────────────────────────────────────────
 
