@@ -35,7 +35,7 @@ public class CoinCollectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.AddScore(coinValue);
+            GameManager.Instance.AddScore(10);
             GameManager.Instance.PlayCoinSound();
             StartCoroutine(HideAndRespawn());
         }
