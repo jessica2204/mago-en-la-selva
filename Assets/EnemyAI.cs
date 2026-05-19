@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [Header("Chase Settings")]
-    [SerializeField] private float chaseSpeed = 2f;
+    [SerializeField] private float chaseSpeed = 1f;
 
     // ── Private references ───────────────────────────────────────────────
     private Transform player;
@@ -60,7 +60,17 @@ public class EnemyAI : MonoBehaviour
     {
         isActive = active;
     }
+    [SerializeField] private int health = 1;
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     /// <summary>Damages the player on contact.</summary>
     private void OnTriggerEnter2D(Collider2D other)
     {
