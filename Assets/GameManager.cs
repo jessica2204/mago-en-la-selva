@@ -206,3 +206,4 @@ public class GameManager : MonoBehaviour
             sfxSource.PlayOneShot(gameOverClip);
     }
 }
+Add victory condition and game over HUD fix
